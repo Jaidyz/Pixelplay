@@ -5,10 +5,14 @@
   --secondary-color:#a06cf9;
   --background-color:#1d1e25;
   --background-color2:#111; 
+  --blank-color:#f6f7f9;
 }
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
   background-color: var(--background-color);
   color: #f6f7f9;
+  overflow-x: hidden; 
+  overflow-y: auto;
 }

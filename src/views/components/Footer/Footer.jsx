@@ -7,7 +7,7 @@ import TwitterIcon from "../../../assets/icons/XIcon";
 export default function Footer() {
   return (
     <footer>
-      <div class="cta-section" data-fade>
+      <div className="cta-section" data-fade>
         <h2>¿Listo para la aventura?</h2>
         <p>
           Explora nuestras categorías y descubre lo último en videojuegos y

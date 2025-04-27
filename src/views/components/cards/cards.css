@@ -1,0 +1,22 @@
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  
+@media (max-width: 1060px){
+    .card-container {
+        grid-template-columns: repeat(3, minmax(14rem, 1fr));
+    }
+}
+@media (max-width: 750px){
+    .card-container {
+        display: flex;
+        flex-direction: column;
+    }
+}

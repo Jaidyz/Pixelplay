@@ -1,14 +1,15 @@
 import React from 'react'
+import 'animate.css';
 import './About.css'
 
 export default function About() {
   return (
-    <section className="container">
+    <section className="container animate__animated animate__backInDown">
 
     <div className="img1"><img src="src/assets/img1.png" alt=""/></div>
-    <div className="img2"></div>
-    <div className="img3"></div>
-    <div className="img4"><img src="/LogoPixelPlay.png" alt=""/></div>
+    <div className="img2"><img src="/src/assets/img2.png" alt="" /></div>
+    <div className="pixel-play-letras"><img src="src/assets/pixelPlayLetras.webp" alt="PixelPlay logo letras" /></div>
+    <div className="pixel-play-logo"><img src="/LogoPixelPlay.png" alt="Pixelplay logo"/></div>
 
         <div className="quienesSomos">
             <h2>Quiénes Somos</h2>
