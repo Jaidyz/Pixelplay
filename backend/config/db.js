@@ -3,14 +3,14 @@ import mysql from 'mysql2';
 import cors from 'cors';
 
 const app = express();
-app.use(cors()); // permite que React acceda al backend
+app.use(cors()); 
 app.use(express.json());
 
 // Conexión a MySQL
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'Millonarios1.', // tu contraseña
+  password: '',
   database: 'TiendaGaming',
   waitForConnections: true,
   connectionLimit: 10,
