@@ -1,151 +1,170 @@
-
-.container-login-register{
-    color: #f6f7f9;
-    background-image:
-    radial-gradient(circle, rgba(94, 91, 91, 0.628) 0%, rgba(0,0,0,1) 76%),
+.container-login-register {
+  color: #f6f7f9;
+  background-image: radial-gradient(
+      circle,
+      rgba(94, 91, 91, 0.628) 0%,
+      rgba(0, 0, 0, 1) 76%
+    ),
     url(/src/assets/Fondo.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
 }
-.plantilla{
-    display: flex;
-    box-shadow: 0 5px 7px rgba(0, 0, 0, .1);
-    min-height: 50vh;
-    margin: .7rem;
-    border-radius: 1rem;
+.plantilla {
+  display: flex;
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1);
+  min-height: 50vh;
+  margin: 0.7rem;
+  border-radius: 1rem;
 }
-.cambio{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    background: linear-gradient(to right, #7f4df59a, #a06cf9a9);
-    background-repeat: no-repeat;
-    background-position: center;
-    border-top-left-radius: 1rem;
-    border-bottom-left-radius: 1rem;
-    padding: 1rem;
+.cambio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background: linear-gradient(to right, #7f4df59a, #a06cf9a9);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  padding: 1rem;
 }
-.cambio h2{
-    color: #fff;
-    font-size: 1.5rem;
-    padding: 0;
-    margin: 0;
+.cambio h2 {
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 0;
+  margin: 0;
 }
-.cambio p{
-    color: #fff;
-    font-size: 1.1rem;
+.cambio p {
+  color: #fff;
+  font-size: 1.1rem;
 }
-.cambio button{
-    background-color: var(--main-color);
-    color: var(--blank-color);
-    border-radius: .2rem;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-    transition: background-color .3s ease;
+.cambio button {
+  background-color: var(--main-color);
+  color: var(--blank-color);
+  border-radius: 0.2rem;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
-.formulario{
-    background-color: var(--background-color);
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 30px;
+.formulario {
+  background-color: var(--background-color);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
 }
-.formulario h2{
-    color: #fff;
-    strong {color: var(--main-color);}
+.error {
+  color: #ff0000;
+  padding: 0;
+  margin: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-.formulario label{
-    display: flex;
-    align-items: center;
-    margin:30px 0;
-    border-radius: .2rem;
-    padding: 0 10px;
-    background-color: #1C1C1E;
-    box-shadow: 0 0 .4vw rgba(0,0,0,0.5), 0 0 0 .15vw transparent;
+form {
+  gap: 0.3rem;
+  display: flex;
+  flex-direction: column;
 }
-.formulario input{
-    width: 100%;
-    padding: 1rem;
-    background-color: #1C1C1E;
-    border: none;
-    outline: none;
-    border-radius: .2rem;
-    color: #ececec;
-    font-size: 1rem;
+.formulario h2 {
+  color: #fff;
+  strong {
+    color: var(--main-color);
+  }
 }
-.formulario input::-webkit-input-placeholder{
-    color: #c5c4c4;
+.formulario label {
+  display: flex;
+  align-items: center;
+  margin: 0.4rem 0;
+  border-radius: 0.2rem;
+  padding: 0 10px;
+  background-color: #1c1c1e;
+  box-shadow: 0 0 0.4vw rgba(0, 0, 0, 0.5), 0 0 0 0.15vw transparent;
+}
+.formulario input {
+  width: 100%;
+  padding: 1rem;
+  background-color: #1c1c1e;
+  border: none;
+  outline: none;
+  border-radius: 0.2rem;
+  color: #ececec;
+  font-size: 1rem;
+}
+.formulario input::-webkit-input-placeholder {
+  color: #c5c4c4;
 }
 .formulario input[type="submit"] {
-    background-color: var(--main-color);
-    color: var(--blank-color);
-    border-radius: .2rem;
-    border: none;
-    padding: 1rem 1rem;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-    transition: background-color .3s ease;
+  background-color: var(--main-color);
+  color: var(--blank-color);
+  border-radius: 0.2rem;
+  border: none;
+  padding: 1rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+.formulario input[type="submit"]:hover,
+.cambio button:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+.logo:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 480px) {
+  .plantilla {
+    flex-direction: column-reverse;
+    margin: 1.5rem;
   }
-  .formulario input[type="submit"]:hover,.cambio button:hover{
-    background-color: var(--secondary-color);
-    transform: scale(1.05);
+  .formulario,
+  .cambio {
+    background-color: transparent;
+    background-image: none;
   }
-
-.logo{
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px;
-
-}
-.logo img{
-    width: 50px;
-    height: 50px;
-}
-.logo:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
+  .cambio p {
+    display: none;
+  }
 }
 
-@media (max-width: 480px){
-    .plantilla{
-        flex-direction: column-reverse;
-        margin: 1.5rem;
-    }
-    .formulario, .cambio{
-        background-color: transparent;
-        background-image: none;
-    }
-    .cambio p{
-        display: none;
-    }
-}
-
-@media (max-width: 767px){
-    .plantilla{
-        flex-direction: column-reverse;
-    }
-    .formulario, .cambio{
-        background-color: transparent;
-        background-image: none;
-    }
-    .cambio p{
-        font-size: 1rem;
-        padding: 0 8rem 0 8rem;
-    }
+@media (max-width: 767px) {
+  .plantilla {
+    flex-direction: column-reverse;
+  }
+  .formulario,
+  .cambio {
+    background-color: transparent;
+    background-image: none;
+  }
+  .cambio p {
+    font-size: 1rem;
+    padding: 0 8rem 0 8rem;
+  }
 }
