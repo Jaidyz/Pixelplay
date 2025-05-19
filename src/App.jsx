@@ -6,6 +6,7 @@ import Accesorios from "./views/pages/accesorios/Accesorios";
 import Register from "./views/pages/login-register/Register";
 import Login from "./views/pages/login-register/Login";
 import Home from "./views/pages/home";
+import ProductoDetalle from "./views/pages/producto-detalle/ProductoDetalle";
 
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="/accesorios" element={<Accesorios />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
+          <Route path="/videojuegos/:id/:name" element={<ProductoDetalle />} />
       </Routes>
     </BrowserRouter>
   );

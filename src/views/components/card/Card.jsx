@@ -2,8 +2,9 @@ import React from 'react'
 import './Card.css'
 import ShoppingCart from "../../../assets/icons/ShoppingCart"
 import HeartIcon from "../../../assets/icons/HeartIcon"
+import { Link } from 'react-router-dom'
 
-function Card({name, price,imgLink}) {
+function Card({id,name, price,imgLink}) {
   return (
         <section className="card">
             <section className='img-container'>
@@ -12,7 +13,7 @@ function Card({name, price,imgLink}) {
             <h3>{name}</h3>
             <h2>{price}</h2>
             <section className='actions'>
-            <button>Ver más</button>
+            <button><Link to={`/videojuegos/${id}/${name}`}>Ver más</Link></button>
             <button><ShoppingCart/></button>
             <button><HeartIcon/> </button>
             </section>
