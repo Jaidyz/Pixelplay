@@ -1,8 +1,4 @@
 :root {
-  --main-color: #7f4df5; 
-  --blank-color: #fff;
-  --background-color: #2c3e50;
-  --secondary-color: #8e44ad;
   --shadow-color: rgba(127, 77, 213, 0.3);
   --hover-color: #6e3de0;
   --danger-color: #c0392b;
@@ -13,7 +9,6 @@
   --panel-header-bg: #f0e9ff;
 }
 
-
 .navbar {
   position: fixed;
   width: 100vw;
@@ -23,14 +18,15 @@
   top: 0;
   padding: 5px 20px;
   z-index: 999;
-  transition: backdrop-filter 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
+  transition: backdrop-filter 0.3s ease, background-color 0.3s ease,
+    padding 0.3s ease;
   background-color: var(--background-color);
   color: var(--blank-color);
 }
 
 .navbar-scrolled {
   backdrop-filter: blur(10px);
-  background-color: rgba(127, 77, 213, 0.44); 
+  background-color: rgba(127, 77, 213, 0.44);
   box-shadow: 0 2px 10px var(--shadow-color);
 }
 
@@ -45,7 +41,6 @@
   cursor: pointer;
   transform: scale(1.1);
 }
-
 
 .menu {
   display: flex;
@@ -71,7 +66,6 @@
   transform: translateY(-4px);
   box-shadow: 0 4px 10px var(--secondary-color);
 }
-
 
 .usuario {
   display: flex;
@@ -121,26 +115,25 @@
   color: var(--hover-color);
 }
 
-
 .overlay {
   position: fixed;
-  top: 60px;
+  top: 50px;
   left: 0;
   width: 100vw;
-  height: calc(100vh - 60px);
-  background-color: rgba(44, 62, 80, 0.7);
+  height: calc(100vh - 50px);
+  background-color: rgba(47, 0, 86, 0.496);
+  backdrop-filter: blur(3px);
   z-index: 1000;
 }
 
 .sidebar {
   position: fixed;
-  top: 60px; 
+  top: 60px;
   right: 0;
   width: 320px;
   max-height: calc(100vh - 60px);
-  background: var(--panel-bg);
   box-shadow: 0 8px 24px var(--shadow-color);
-  border-radius: 12px 0 0 12px;
+  border-radius: 1rem 0 0 1rem;
   overflow-y: auto;
   z-index: 1001;
   transform: translateX(100%);
@@ -150,12 +143,10 @@
   flex-direction: column;
 }
 
-
 .sidebar.open {
   transform: translateX(0);
   opacity: 1;
 }
-
 
 .menu-header {
   display: flex;
@@ -163,14 +154,14 @@
   align-items: center;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid #ddd;
-  background-color: var(--panel-header-bg);
+  background-color: var(--background-color);
   border-radius: 12px 12px 0 0;
 }
 
 .menu-header h3 {
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--blank-color);
   margin: 0;
 }
 
@@ -186,14 +177,13 @@
   color: var(--danger-color);
 }
 
-
 .menu-content {
   padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  background-color: var(--background-color);
 }
-
 
 .item-card {
   display: flex;
@@ -201,7 +191,7 @@
   gap: 0.8rem;
   padding: 0.5rem;
   border-radius: 10px;
-  background: #fafafa;
+  background: var(--main-color);
   box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
   transition: box-shadow 0.3s ease;
 }
@@ -221,13 +211,12 @@
   flex-grow: 1;
   font-size: 1rem;
   font-weight: 500;
-  color: var(--text-dark);
+  color: var(--blank-color);
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 .remove-button {
   background-color: var(--danger-color);
@@ -243,34 +232,35 @@
   background-color: var(--danger-hover);
 }
 
-
 .usuario-info {
   padding: 1rem 1.25rem;
   border-bottom: 1px solid #ddd;
   font-weight: 600;
-  color: var(--text-dark);
+  color: var(--blank-color);
+  background-color: var(--background-color);
 }
-
 
 .opciones {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   padding: 1rem 1.25rem;
+  background-color: var(--background-color);
 }
 
 .opciones div {
+  display: flex;
   cursor: pointer;
   padding: 0.5rem 1rem;
   border-radius: 8px;
-  background-color: #efefef;
+  background-color: var(--main-color);
   transition: background-color 0.3s ease;
+  justify-content: center;
 }
 
 .opciones div:hover {
-  background-color: #ddd;
+  background-color: var(--hover-color);
 }
-
 
 @media (max-width: 1060px) {
   .navbar .logonavbar img {

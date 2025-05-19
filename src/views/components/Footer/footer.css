@@ -46,30 +46,3 @@ footer {
   .social-links a:hover {
     color: var(--main-color);
   }
-  .subscribe-form {
-    margin: 20px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    max-width: 400px;
-  }
-  .subscribe-form input[type=email] {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    flex: 1;
-    min-width: 200px;
-  }
-  .subscribe-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background: var(--main-color);
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-  }
-  .subscribe-form button:hover {
-    transform: scale(1.05);
-  }

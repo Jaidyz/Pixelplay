@@ -217,16 +217,12 @@ function Navbar() {
       {showUserMenu && (
         <div className="sidebar user-menu open">
           <div className="usuario-info">
-            {session?.user?.user_metadata?.displayName ? (
               <p>
                 Hola, <strong>{session.user.user_metadata.displayName}!</strong>
               </p>
-            ) : (
-              <p>Hola, Usuario!</p>
-            )}
           </div>
-          <p>¡Bienvenido a PixelPlay!</p>
           <section className="opciones">
+          <p>¡Bienvenido a PixelPlay!</p>
             <div>Configuraciones</div>
             <div onClick={handleLogout}>Cerrar Sesión</div>
           </section>
