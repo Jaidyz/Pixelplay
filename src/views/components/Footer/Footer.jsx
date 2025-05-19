@@ -17,10 +17,6 @@ export default function Footer() {
       </div>
 
       <p>© 2025 Tienda de Videojuegos. Todos los derechos reservados.</p>
-      <div className="subscribe-form">
-        <input type="text" placeholder="Suscríbete a nuestro boletín" />
-        <button>Suscribirse</button>
-      </div>
       <div className="social-links">
         <a href="#">
           <FacebookIcon />
