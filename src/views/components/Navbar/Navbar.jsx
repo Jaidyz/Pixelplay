@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import ShoppingCart from "../../../assets/icons/ShoppingCart";
@@ -13,21 +12,17 @@ function Navbar() {
   const { session, signOut } = useAuth();
   const navigate = useNavigate();
 
-
   const [scrolled, setScrolled] = useState(false);
   const [widthSize, setWidthSize] = useState(window.innerWidth);
 
- 
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [showCartMenu, setShowCartMenu] = useState(false);
   const [showFavoritesMenu, setShowFavoritesMenu] = useState(false);
-
 
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
 
   const isLoggedIn = !!session;
-
 
   useEffect(() => {
     const handleResize = () => setWidthSize(window.innerWidth);
@@ -35,13 +30,11 @@ function Navbar() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
 
   const handleLogout = async () => {
     try {
@@ -53,7 +46,6 @@ function Navbar() {
     }
   };
 
-  
   const toggleUserMenu = () => {
     setShowUserMenu((prev) => {
       if (!prev) {
@@ -84,7 +76,6 @@ function Navbar() {
     });
   };
 
-
   useEffect(() => {
     if (showFavoritesMenu && session?.user?.id) {
       async function fetchFavorites() {
@@ -101,7 +92,6 @@ function Navbar() {
       fetchFavorites();
     }
   }, [showFavoritesMenu, session]);
-
 
   useEffect(() => {
     if (showCartMenu && session?.user?.id) {
@@ -139,7 +129,6 @@ function Navbar() {
     }
   }, [showCartMenu, session]);
 
-
   const handleRemoveFavorite = async (id) => {
     try {
       const { error } = await supabase
@@ -150,7 +139,6 @@ function Navbar() {
       if (error) {
         console.error("Error al eliminar de lista de deseos:", error);
       } else {
-        
         setFavoriteItems((prev) => prev.filter((item) => item.id !== id));
       }
     } catch (error) {
@@ -158,7 +146,6 @@ function Navbar() {
     }
   };
 
- 
   const handleRemoveCartItem = async (id) => {
     try {
       const { error } = await supabase
@@ -169,7 +156,6 @@ function Navbar() {
       if (error) {
         console.error("Error al eliminar ítem del carrito:", error);
       } else {
-
         setCartItems((prev) => prev.filter((item) => item.id !== id));
       }
     } catch (error) {
@@ -200,10 +186,7 @@ function Navbar() {
         <section className="usuario">
           {isLoggedIn ? (
             <div className="usuario-info-logged">
-              <HeartIcon
-                className="heartIcon"
-                onClick={toggleFavoritesMenu}
-              />
+              <HeartIcon className="heartIcon" onClick={toggleFavoritesMenu} />
               <ShoppingCart
                 className="shoppingCart"
                 onClick={toggleCartMenu}
@@ -236,8 +219,7 @@ function Navbar() {
           <div className="usuario-info">
             {session?.user?.user_metadata?.displayName ? (
               <p>
-                Hola,{" "}
-                <strong>{session.user.user_metadata.displayName}!</strong>
+                Hola, <strong>{session.user.user_metadata.displayName}!</strong>
               </p>
             ) : (
               <p>Hola, Usuario!</p>
@@ -256,8 +238,11 @@ function Navbar() {
         <div className="sidebar favorites-menu open">
           <div className="menu-header">
             <h3>Lista de Deseos</h3>
-            <button onClick={() => setShowFavoritesMenu(false)}>
-              Cerrar
+            <button
+              onClick={() => setShowFavoritesMenu(false)}
+              aria-label="Cerrar lista de deseos"
+            >
+              ✕
             </button>
           </div>
           <div className="menu-content">
@@ -265,12 +250,8 @@ function Navbar() {
               favoriteItems.map((item, index) => (
                 <div key={item.id || index} className="item-card">
                   <img
-                    src={
-                      item.producto?.img_url || "/assets/default-image.png"
-                    }
-                    alt={
-                      item.producto?.nombre || "Producto sin nombre"
-                    }
+                    src={item.producto?.img_url || "/assets/default-image.png"}
+                    alt={item.producto?.nombre || "Producto sin nombre"}
                   />
                   <p>{item.producto?.nombre || "Sin nombre"}</p>
                   <button
@@ -293,19 +274,20 @@ function Navbar() {
         <div className="sidebar cart-menu open">
           <div className="menu-header">
             <h3>Carrito</h3>
-            <button onClick={() => setShowCartMenu(false)}>Cerrar</button>
+            <button
+              onClick={() => setShowCartMenu(false)}
+              aria-label="Cerrar carrito"
+            >
+              ✕
+            </button>
           </div>
           <div className="menu-content">
             {cartItems && cartItems.length > 0 ? (
               cartItems.map((item, index) => (
                 <div key={item.id || index} className="item-card">
                   <img
-                    src={
-                      item.producto?.img_url || "/assets/default-image.png"
-                    }
-                    alt={
-                      item.producto?.nombre || "Producto sin nombre"
-                    }
+                    src={item.producto?.img_url || "/assets/default-image.png"}
+                    alt={item.producto?.nombre || "Producto sin nombre"}
                   />
                   <p>{item.producto?.nombre || "Sin nombre"}</p>
                   <button
