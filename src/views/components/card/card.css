@@ -13,6 +13,9 @@
     margin: 0.4rem 0 0.3rem 0;
   }
 }
+.info{
+      margin-top: auto;
+}
 .img-container {
   display: flex;
   justify-content: center;
@@ -37,6 +40,7 @@
   align-items: center;
   margin-top: 1rem;
   background-color: var(--main-color);
+  margin-top: auto;
   & button {
     background-color: transparent;
     color: var(--blank-color);

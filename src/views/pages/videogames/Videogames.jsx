@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Videogames.css";
 import Cards from "../../components/cards/Cards";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/Footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
 import Slider from "../../components/slider/Slider";
 

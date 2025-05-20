@@ -2,21 +2,22 @@ import React, { useEffect, useState } from "react";
 import Card from "../card/Card";
 import "./cards.css";
 import { supabase } from "../../../../supabase/supabase.config.jsx";
+import Swal from "sweetalert2";
 
 function Cards({ tipo, categoria }) {
   const [productos, setProductos] = useState([]);
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
 
-  
   useEffect(() => {
     const fetchUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       setUser(user);
     };
     fetchUser();
   }, []);
 
-  
   const getProductos = async () => {
     try {
       const { data, error } = await supabase.from("productos").select("*");
@@ -48,13 +49,25 @@ function Cards({ tipo, categoria }) {
       const { data, error } = await supabase
         .from("lista_deseos")
         .insert([
-          { 
-            usuario_id: user.id, 
+          {
+            usuario_id: user.id,
             producto_id: productId,
-            fecha_agregado: new Date().toISOString()
-          }
+            fecha_agregado: new Date().toISOString(),
+          },
         ])
-        .select(); 
+        .select();
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Producto agregado a lista de deseos.",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "mini-toast",
+        },
+        toast: true, // Para hacerlo tipo toast
+      });
+
       if (error) {
         throw error;
       }
@@ -64,7 +77,6 @@ function Cards({ tipo, categoria }) {
     }
   };
 
- 
   const handleAddToCart = async (productId, price) => {
     try {
       if (!user?.id) {
@@ -84,16 +96,15 @@ function Cards({ tipo, categoria }) {
 
       let pedido_id;
       if (!pedidoExistente) {
-
         const { data: nuevoPedido, error: nuevoPedidoError } = await supabase
           .from("pedidos")
           .insert([
             {
               usuario_id: user.id,
               fecha: new Date().toISOString(),
-              total: price, 
-              estado: "carrito"
-            }
+              total: price,
+              estado: "carrito",
+            },
           ])
           .select()
           .single();
@@ -104,8 +115,18 @@ function Cards({ tipo, categoria }) {
       } else {
         pedido_id = pedidoExistente.id;
       }
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Producto agregado al carrito.",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "mini-toast",
+        },
+        toast: true, // Para hacerlo tipo toast
+      });
 
-  
       const { data, error } = await supabase
         .from("detalles_pedido")
         .insert([
@@ -113,8 +134,8 @@ function Cards({ tipo, categoria }) {
             pedido_id: pedido_id,
             producto_id: productId,
             cantidad: 1,
-            precio_unitario: price
-          }
+            precio_unitario: price,
+          },
         ])
         .select();
       if (error) {
@@ -126,10 +147,11 @@ function Cards({ tipo, categoria }) {
     }
   };
 
- 
   const filteredProducts = productos
     .filter((producto) => (tipo ? producto.tipo_producto === tipo : true))
-    .filter((producto) => (categoria ? producto.categoria === categoria : true));
+    .filter((producto) =>
+      categoria ? producto.categoria === categoria : true
+    );
 
   return (
     <section className="cards">
@@ -141,9 +163,7 @@ function Cards({ tipo, categoria }) {
             name={producto.nombre}
             price={producto.precio}
             imgLink={producto.img_url}
-            
             onAddToCart={() => handleAddToCart(producto.id, producto.precio)}
-            
             onAddToFavorites={() => handleAddToFavorites(producto.id)}
           />
         ))}

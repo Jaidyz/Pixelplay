@@ -10,8 +10,10 @@ function Card({ id, name, price, imgLink, onAddToCart, onAddToFavorites }) {
       <section className="img-container">
         <img src={imgLink} alt={name} />
       </section>
+      <div className='info'>
       <h3>{name}</h3>
       <h2>{price}</h2>
+      </div>
       <section className="actions">
         <button>
           <Link to={`/videojuegos/${id}/${name}`}>Ver más</Link>

@@ -4,6 +4,8 @@ import ShoppingCart from "../../../assets/icons/ShoppingCart";
 import HeartIcon from "../../../assets/icons/HeartIcon";
 import UserIcon from "../../../assets/icons/UserIcon";
 import { useAuth } from "../../../context/AuthContext";
+import logoDesktop from "/PixelPlay.png";
+import logoMobile from "/LogoPixelPlay.png";
 
 import { supabase } from "../../../../supabase/supabase.config";
 import "./navbar.css";
@@ -116,7 +118,10 @@ function Navbar() {
             .eq("pedido_id", pedido.id);
 
           if (detallesError) {
-            console.error("Error al obtener detalles del carrito:", detallesError);
+            console.error(
+              "Error al obtener detalles del carrito:",
+              detallesError
+            );
             setCartItems([]);
           } else {
             setCartItems(detalles);
@@ -169,11 +174,7 @@ function Navbar() {
         <section className="logonavbar">
           <Link to="/">
             <img
-              src={
-                widthSize >= 1060
-                  ? "./src/assets/PixelPlay.png"
-                  : "./src/assets/LogoPixelPlay.webp"
-              }
+              src={widthSize >= 1060 ? logoDesktop : logoMobile}
               alt="Logo de PixelPlay"
             />
           </Link>
@@ -187,10 +188,7 @@ function Navbar() {
           {isLoggedIn ? (
             <div className="usuario-info-logged">
               <HeartIcon className="heartIcon" onClick={toggleFavoritesMenu} />
-              <ShoppingCart
-                className="shoppingCart"
-                onClick={toggleCartMenu}
-              />
+              <ShoppingCart className="shoppingCart" onClick={toggleCartMenu} />
               <UserIcon className="userIcon" onClick={toggleUserMenu} />
             </div>
           ) : (
@@ -217,12 +215,12 @@ function Navbar() {
       {showUserMenu && (
         <div className="sidebar user-menu open">
           <div className="usuario-info">
-              <p>
-                Hola, <strong>{session.user.user_metadata.displayName}!</strong>
-              </p>
+            <p>
+              Hola, <strong>{session.user.user_metadata.displayName}!</strong>
+            </p>
           </div>
           <section className="opciones">
-          <p>¡Bienvenido a PixelPlay!</p>
+            <p>¡Bienvenido a PixelPlay!</p>
             <div>Configuraciones</div>
             <div onClick={handleLogout}>Cerrar Sesión</div>
           </section>

@@ -3,6 +3,7 @@ import "./Footer.css";
 import FacebookIcon from "../../../assets/icons/FacebookIcon";
 import InstagramIcon from "../../../assets/icons/InstagramIcon";
 import TwitterIcon from "../../../assets/icons/XIcon";
+import {Link} from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -13,7 +14,7 @@ export default function Footer() {
           Explora nuestras categorías y descubre lo último en videojuegos y
           accesorios.
         </p>
-        <a href="#">Ir a la Tienda</a>
+        <Link>Ir a la Tienda</Link>
       </div>
 
       <p>© 2025 Tienda de Videojuegos. Todos los derechos reservados.</p>

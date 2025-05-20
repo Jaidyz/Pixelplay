@@ -88,7 +88,7 @@ export default function Register() {
         position: "bottom-end",
         icon: "success",
         title:
-          "Registro exitoso. Te hemos enviado un correo de confirmación. Por favor, verifica tu correo para activar tu cuenta.",
+          "Registro exitoso.",
         showConfirmButton: false,
         timer: 1500,
         theme: "dark",

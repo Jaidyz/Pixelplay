@@ -1,6 +1,6 @@
 import React from 'react'
 import Cards from "../../components/cards/Cards";
-import Footer from "../../components/footer/Footer"
+import Footer from "../../components/Footer/Footer"
 import Navbar from "../../components/navbar/Navbar"
 
 function Accesorios() {

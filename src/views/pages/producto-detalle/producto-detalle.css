@@ -74,13 +74,43 @@
   font-weight: bold;
 }
 
+.botones {
+  margin-top: auto;
+}
+.botones button {
+  background-color: transparent;
+  color: var(--blank-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--secondary-color);
+    transition: 0.3s;
+  }
+}
+
+.mini-toast {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  padding: 8px 16px !important;
+  font-size: 14px !important;
+  width: auto !important;
+  min-width: 200px;
+  max-width: 300px;
+  background-color: var(--main-color) !important;
+  color: var(--blank-color) !important;
+}
+
 /* Media Query para dispositivos móviles */
 @media (max-width: 768px) {
   .contenedorProductoDetalle {
     flex-direction: column;
   }
-  
-  .trailer-container, .contenido {
+
+  .trailer-container,
+  .contenido {
     width: 100%;
   }
 }

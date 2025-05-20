@@ -1,20 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
-import { WebGLRenderer } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import 'animate.css';
-import './About.css';
+import React, { useEffect, useRef, useState } from "react";
+import * as THREE from "three";
+import { WebGLRenderer } from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import "animate.css";
+import "./About.css";
 
 export default function About() {
   const threeContainer = useRef(null);
   const [webGLAvailable, setWebGLAvailable] = useState(true);
+  // Referencias para mantener el estado entre renders
+  const sceneRef = useRef(null);
+  const gameObjectsRef = useRef([]);
+  const animationIdRef = useRef(null);
 
   useEffect(() => {
-  
     const checkWebGL = () => {
       try {
-        const canvas = document.createElement('canvas');
-        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        const canvas = document.createElement("canvas");
+        const gl =
+          canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
         return gl && gl instanceof WebGLRenderingContext;
       } catch (e) {
         return false;
@@ -26,66 +30,80 @@ export default function About() {
       return;
     }
 
-
-    let scene, camera, renderer, controls, animationId;
-    const gameObjects = [];
-
-   
+    let scene, camera, renderer, controls;
+    
     const initThreeJS = () => {
       try {
-    
         scene = new THREE.Scene();
+        sceneRef.current = scene;
+        
         camera = new THREE.PerspectiveCamera(
           75,
-          threeContainer.current.clientWidth / threeContainer.current.clientHeight,
+          threeContainer.current.clientWidth /
+            threeContainer.current.clientHeight,
           0.1,
           1000
         );
         camera.position.z = 15;
 
-      
         renderer = new WebGLRenderer({
-          alpha: true,
+          alpha: false,
           antialias: true,
-          powerPreference: "high-performance"
+          powerPreference: "high-performance",
         });
-        renderer.setSize(threeContainer.current.clientWidth, threeContainer.current.clientHeight);
+        renderer.setSize(
+          threeContainer.current.clientWidth,
+          threeContainer.current.clientHeight
+        );
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        
+        // Limpiar cualquier canvas anterior
+        while (threeContainer.current.firstChild) {
+          threeContainer.current.removeChild(threeContainer.current.firstChild);
+        }
+        
         threeContainer.current.appendChild(renderer.domElement);
 
-     
-        const ambientLight = new THREE.AmbientLight(0x404040);
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
         scene.add(ambientLight);
-        
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
         directionalLight.position.set(1, 1, 1);
         scene.add(directionalLight);
-        
-        const pointLight = new THREE.PointLight(0xff00ff, 1, 100);
+
+        const pointLight = new THREE.PointLight(0xff00ff, 1.5, 100);
         pointLight.position.set(5, 5, 5);
         scene.add(pointLight);
 
-       
         const createGameElements = () => {
           const geometries = [
             new THREE.BoxGeometry(1, 1, 1),
             new THREE.SphereGeometry(0.7, 16, 16),
             new THREE.ConeGeometry(0.5, 1, 16),
-            new THREE.TorusGeometry(0.6, 0.2, 16, 32)
+            new THREE.TorusGeometry(0.6, 0.2, 16, 32),
           ];
 
-          const colors = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff];
+          const colors = [
+            0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0xff00ff, 0x00ffff,
+          ];
+
+          // Limpiar objetos anteriores
+          gameObjectsRef.current = [];
 
           for (let i = 0; i < 20; i++) {
-            const geometry = geometries[Math.floor(Math.random() * geometries.length)];
+            const geometry =
+              geometries[Math.floor(Math.random() * geometries.length)];
             const material = new THREE.MeshPhongMaterial({
               color: colors[Math.floor(Math.random() * colors.length)],
-              emissive: 0x111111,
+              emissive: 0x000000,
               specular: 0xffffff,
-              shininess: 30,
-              transparent: true,
-              opacity: 0.85
+              shininess: 50,
+              transparent: false,
+              opacity: 1,
             });
+
+            material.depthWrite = true;
+            material.depthTest = true;
 
             const mesh = new THREE.Mesh(geometry, material);
             mesh.position.set(
@@ -100,16 +118,17 @@ export default function About() {
             );
             mesh.userData = {
               speed: Math.random() * 0.01 + 0.005,
-              rotationSpeed: Math.random() * 0.02 + 0.01
+              rotationSpeed: Math.random() * 0.02 + 0.01,
+              initialY: mesh.position.y,
+              phase: Math.random() * Math.PI * 2, // Fase aleatoria para el movimiento
             };
             scene.add(mesh);
-            gameObjects.push(mesh);
+            gameObjectsRef.current.push(mesh);
           }
         };
 
         createGameElements();
 
-        
         controls = new OrbitControls(camera, renderer.domElement);
         controls.enableZoom = false;
         controls.enablePan = false;
@@ -117,34 +136,43 @@ export default function About() {
         controls.autoRotateSpeed = 0.3;
 
         const animate = () => {
-          animationId = requestAnimationFrame(animate);
+          animationIdRef.current = requestAnimationFrame(animate);
           
-          gameObjects.forEach(obj => {
+          const now = Date.now() * 0.001; // Convertir a segundos para un movimiento más suave
+          
+          gameObjectsRef.current.forEach((obj) => {
+            // Rotación continua
             obj.rotation.x += obj.userData.rotationSpeed;
             obj.rotation.y += obj.userData.rotationSpeed * 0.7;
-            obj.position.y = Math.sin(Date.now() * obj.userData.speed) * 3;
+            
+            // Movimiento ondulatorio con fase personalizada
+            obj.position.y = obj.userData.initialY + 
+              Math.sin(now * 2 + obj.userData.phase) * 1.5;
           });
-          
+
           controls.update();
           renderer.render(scene, camera);
         };
-        
+
         animate();
 
-      
         const handleResize = () => {
           if (!threeContainer.current) return;
-          camera.aspect = threeContainer.current.clientWidth / threeContainer.current.clientHeight;
+          camera.aspect =
+            threeContainer.current.clientWidth /
+            threeContainer.current.clientHeight;
           camera.updateProjectionMatrix();
-          renderer.setSize(threeContainer.current.clientWidth, threeContainer.current.clientHeight);
+          renderer.setSize(
+            threeContainer.current.clientWidth,
+            threeContainer.current.clientHeight
+          );
         };
-        
-        window.addEventListener('resize', handleResize);
 
-        return () => window.removeEventListener('resize', handleResize);
+        window.addEventListener("resize", handleResize);
 
+        return () => window.removeEventListener("resize", handleResize);
       } catch (error) {
-        console.error('Error en Three.js:', error);
+        console.error("Error en Three.js:", error);
         setWebGLAvailable(false);
       }
     };
@@ -152,20 +180,33 @@ export default function About() {
     initThreeJS();
 
     return () => {
-      if (animationId) cancelAnimationFrame(animationId);
+      if (animationIdRef.current) {
+        cancelAnimationFrame(animationIdRef.current);
+        animationIdRef.current = null;
+      }
+      
       if (renderer && threeContainer.current) {
-        threeContainer.current.removeChild(renderer.domElement);
+        // Asegurarse de que el elemento DOM existe antes de intentar eliminarlo
+        const canvas = renderer.domElement;
+        if (canvas.parentNode) {
+          canvas.parentNode.removeChild(canvas);
+        }
         renderer.dispose();
       }
+      
       if (controls) controls.dispose();
-      if (scene) {
-        scene.traverse(child => {
+      
+      if (sceneRef.current) {
+        sceneRef.current.traverse((child) => {
           if (child.isMesh) {
             child.geometry?.dispose();
             child.material?.dispose();
           }
         });
       }
+      
+      // Limpiar los objetos
+      gameObjectsRef.current = [];
     };
   }, []);
 
@@ -178,12 +219,19 @@ export default function About() {
       </video>
 
       {/* Contenedor Three.js */}
-      <div className="threejs-container" ref={threeContainer} />
-      
+      <div 
+        className="threejs-container" 
+        ref={threeContainer} 
+        style={{ width: '100%', height: '100%', position: 'absolute' }}
+      />
+
       {/* Mensaje si WebGL no está disponible */}
       {!webGLAvailable && (
         <div className="webgl-warning">
-          <p>⚠️ Los efectos 3D no están disponibles en tu navegador. Para la mejor experiencia, usa Chrome o Firefox.</p>
+          <p>
+            ⚠️ Los efectos 3D no están disponibles en tu navegador. Para la
+            mejor experiencia, usa Chrome o Firefox.
+          </p>
         </div>
       )}
 
@@ -192,15 +240,15 @@ export default function About() {
         <div className="img1 animate__animated animate__fadeInRight">
           <img src="src/assets/img1.png" alt="Juegos destacados" />
         </div>
-        
+
         <div className="img2 animate__animated animate__fadeInLeft">
           <img src="src/assets/img2.png" alt="Consolas y accesorios" />
         </div>
-        
+
         <div className="pixel-play-letras animate__animated animate__zoomIn">
           <img src="src/assets/pixelPlayLetras.webp" alt="PixelPlay" />
         </div>
-        
+
         <div className="pixel-play-logo animate__animated animate__zoomIn">
           <img src="/LogoPixelPlay.png" alt="Logo PixelPlay" />
         </div>
@@ -209,12 +257,15 @@ export default function About() {
         <div className="quienesSomos animate__animated animate__fadeInUp">
           <h2>Quiénes Somos</h2>
           <p>
-            En <strong>PixelPlay</strong> somos apasionados del mundo gaming. Desde 2010, nos dedicamos a 
-            ofrecer los mejores videojuegos, consolas y accesorios del mercado. Nuestro equipo está 
-            formado por gamers expertos que te asesorarán para que encuentres exactamente lo que buscas.
+            En <strong>PixelPlay</strong> somos apasionados del mundo gaming.
+            Desde 2010, nos dedicamos a ofrecer los mejores videojuegos,
+            consolas y accesorios del mercado. Nuestro equipo está formado por
+            gamers expertos que te asesorarán para que encuentres exactamente lo
+            que buscas.
           </p>
           <p>
-            Más que una tienda, somos una comunidad donde los amantes de los videojuegos encuentran su hogar.
+            Más que una tienda, somos una comunidad donde los amantes de los
+            videojuegos encuentran su hogar.
           </p>
         </div>
 
@@ -222,7 +273,9 @@ export default function About() {
         <div className="mision animate__animated animate__fadeInUp">
           <h2>Misión</h2>
           <p>
-            Nuestra misión es <strong>revolucionar la experiencia de compra gaming</strong>, ofreciendo:
+            Nuestra misión es{" "}
+            <strong>revolucionar la experiencia de compra gaming</strong>,
+            ofreciendo:
           </p>
           <ul>
             <li>Catálogo actualizado con los últimos lanzamientos</li>
@@ -232,7 +285,8 @@ export default function About() {
             <li>Soporte post-venta excepcional</li>
           </ul>
           <p>
-            Queremos que cada cliente viva la emoción del gaming como si estuviera en la sala de su casa.
+            Queremos que cada cliente viva la emoción del gaming como si
+            estuviera en la sala de su casa.
           </p>
         </div>
 
@@ -249,7 +303,8 @@ export default function About() {
             <li>Comunidad gaming más grande del país</li>
           </ul>
           <p>
-            Innovamos constantemente para ofrecerte el futuro del entretenimiento digital hoy.
+            Innovamos constantemente para ofrecerte el futuro del
+            entretenimiento digital hoy.
           </p>
         </div>
       </div>
