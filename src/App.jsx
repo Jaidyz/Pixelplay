@@ -5,7 +5,7 @@ import Videogames from "./views/pages/videogames/Videogames";
 import Accesorios from "./views/pages/accesorios/Accesorios";
 import Register from "./views/pages/login-register/Register";
 import Login from "./views/pages/login-register/Login";
-import Home from "./views/pages/home";
+import Home from "./views/pages/Home";
 import ProductoDetalle from "./views/pages/producto-detalle/ProductoDetalle";
 
 
