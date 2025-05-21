@@ -6,6 +6,7 @@ import "animate.css";
 import "./about.css";
 import Img1 from "/img1.png";
 import Img2 from "/img2.png";
+import LetrasPixelPlay from "/pixelPlayLetras.webp";
 export default function About() {
   const threeContainer = useRef(null);
   const [webGLAvailable, setWebGLAvailable] = useState(true);
@@ -247,7 +248,7 @@ export default function About() {
         </div>
 
         <div className="pixel-play-letras animate__animated animate__zoomIn">
-          <img src="/pixelPlayLetras.webp" alt="PixelPlay" />
+          <img src={LetrasPixelPlay} alt="PixelPlay" />
         </div>
 
         <div className="pixel-play-logo animate__animated animate__zoomIn">
