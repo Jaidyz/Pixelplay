@@ -1,5 +1,5 @@
 import Footer from "./../../components/Footer/Footer";
-import Navbar from "./../../components/navbar/Navbar";
+import Navbar from "./../../components/Navbar/Navbar";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../../supabase/supabase.config.jsx";
