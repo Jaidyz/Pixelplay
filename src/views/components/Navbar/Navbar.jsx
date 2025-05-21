@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import ShoppingCart from "../../../assets/icons/ShoppingCart";
 import HeartIcon from "../../../assets/icons/HeartIcon";
@@ -23,6 +23,7 @@ function Navbar() {
 
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   const isLoggedIn = !!session;
 
@@ -168,6 +169,29 @@ function Navbar() {
     }
   };
 
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetchUserData();
+    }
+  }, [session]);
+  const fetchUserData = async () => {
+  if (!session?.user?.id) return;
+  
+  const { data, error } = await supabase
+    .from('usuarios')
+    .select('*')
+    .eq('auth_user_id', session.user.id)
+    .single(); // .single() porque esperamos un solo resultado
+    
+  if (error) {
+    console.error('Error al obtener datos del usuario:', error);
+  } else {
+    console.log('Datos del usuario:', data);
+    // Aquí puedes guardar los datos en el estado
+    setUserData(data);
+  }
+};
+
   return (
     <>
       <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
@@ -221,7 +245,9 @@ function Navbar() {
           </div>
           <section className="opciones">
             <p>¡Bienvenido a PixelPlay!</p>
-            <div><Link to={"adminpanel"}>Admin panel</Link></div>
+            {userData && userData.tipo === "admin" && (
+              <div><Link to={"adminpanel"}>Admin panel</Link></div>
+              )}
             <div onClick={handleLogout}>Configuración</div>
             <div onClick={handleLogout}>Cerrar Sesión</div>
           </section>
