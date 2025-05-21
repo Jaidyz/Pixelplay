@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./videogames.css";
 import Cards from "../../components/cards/Cards";
-import Footer from "../../components/footer/Footer";
-import Navbar from "../../components/navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
 import Slider from "../../components/slider/Slider";
 
 export default function Videogames() {
