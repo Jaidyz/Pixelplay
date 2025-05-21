@@ -1,0 +1,103 @@
+/* Estilos para el contenedor principal */
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Estilos para el wrapper del slider */
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para el contenedor de slides */
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos para cada slide individual */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Estilo para la slide activa */
+.slide.active {
+  opacity: 1;
+}
+
+/* Estilos para las imágenes dentro de los slides */
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos para los botones de navegación */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+/* Estilos para los indicadores */
+.indicators {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+/* Estilos para cada indicador individual */
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 4px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilo para el indicador activo */
+.indicator.active {
+  background-color: #0066cc;
+}
