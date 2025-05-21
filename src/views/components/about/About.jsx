@@ -4,8 +4,8 @@ import { WebGLRenderer } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import "animate.css";
 import "./about.css";
-import Img1 from "Img1.png";
-import Img2 from "Img2.png";
+import Img1 from "/img1.png";
+import Img2 from "/img2.png";
 export default function About() {
   const threeContainer = useRef(null);
   const [webGLAvailable, setWebGLAvailable] = useState(true);
