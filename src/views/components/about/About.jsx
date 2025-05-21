@@ -6,7 +6,7 @@ import "animate.css";
 import "./about.css";
 import Img1 from "/img1.png";
 import Img2 from "/img2.png";
-import LetrasPixelPlay from "/pixelPlayLetras.webp";
+import LetrasPixelPlay from "/pixelplayLetras.webp";
 export default function About() {
   const threeContainer = useRef(null);
   const [webGLAvailable, setWebGLAvailable] = useState(true);
