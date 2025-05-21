@@ -18,7 +18,7 @@ import {
 import ProductoForm from "../../components/productosForm/ProductosForm";
 import ProductosGrid from "../../components/productosGrid/ProductosGrid";
 import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 export default function AdminPanel() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
