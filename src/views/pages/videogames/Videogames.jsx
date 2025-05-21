@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Videogames.css";
+import "./videogames.css";
 import Cards from "../../components/cards/Cards";
 import Footer from "../../components/footer/Footer";
 import Navbar from "../../components/navbar/Navbar";
