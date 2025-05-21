@@ -182,7 +182,7 @@ function ProductoDetalle() {
             <>
               <h2>Trailer</h2>
               <section className="trailer">
-                <ReactPlayer url={producto.trailer_url} controls />
+                <ReactPlayer url={producto.trailer_url} controls width={"auto"} height={"280px"} />
               </section>
             </>
           ) : (
