@@ -5,7 +5,7 @@ import HeartIcon from "../../../assets/icons/HeartIcon";
 import UserIcon from "../../../assets/icons/UserIcon";
 import { useAuth } from "../../../context/AuthContext";
 import logoDesktop from "/PixelPlay.png";
-import logoMobile from "/LogoPixelPlay.png";
+import logoMobile from "/LogoPixelPlay.webp";
 
 import { supabase } from "../../../../supabase/supabase.config";
 import "./navbar.css";
