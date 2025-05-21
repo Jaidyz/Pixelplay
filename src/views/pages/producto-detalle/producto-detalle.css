@@ -32,6 +32,11 @@
   margin-bottom: 20px;
   /* El React Player ocupará todo el ancho disponible */
 }
+.trailer img{
+  width: 100%;
+  height: auto;
+
+}
 
 .trailer-container p {
   line-height: 1.6;
