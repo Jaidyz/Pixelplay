@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../../../../supabase/supabase.config.jsx";
 import ReactPlayer from "react-player";
-import "./Producto-detalle.css";
+import "./producto-detalle.css";
 import ShoppingCart from "../../../assets/icons/ShoppingCart";
 import HeartIcon from "../../../assets/icons/HeartIcon";
 import Swal from "sweetalert2";
