@@ -1,7 +1,7 @@
 import {useState} from "react";
 import Cards from "../../components/cards/Cards";
 import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 
 function Accesorios() {
   const [categoria, setCategoria] = useState("");
