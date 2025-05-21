@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { WebGLRenderer } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import "animate.css";
-import "./About.css";
+import "./about.css";
 
 export default function About() {
   const threeContainer = useRef(null);
