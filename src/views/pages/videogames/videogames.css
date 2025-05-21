@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 100%;
   background-color: var(--background-color);
-  margin-top: 20rem;
+  margin-top: 5rem;
 }
 .contenedor-categorias{
   display: flex;
@@ -45,4 +45,12 @@
 .categorias a:hover {
   color: var(--main-color);
   transition: 0.3s;
+}
+.activo{
+  text-decoration: underline var(--main-color) !important;
+  color: var(--main-color) !important;
+  translate: 0px -7px;
+  transition: 0.3s;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
 }

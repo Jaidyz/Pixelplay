@@ -7,6 +7,7 @@ import Register from "./views/pages/login-register/Register";
 import Login from "./views/pages/login-register/Login";
 import Home from "./views/pages/Home";
 import ProductoDetalle from "./views/pages/producto-detalle/ProductoDetalle";
+import AdminPanel from "./views/pages/admin-panel/AdminPanel";
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/accesorios" element={<Accesorios />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
+          <Route path="/adminpanel" element={<AdminPanel/>} />
           <Route path="/videojuegos/:id/:name" element={<ProductoDetalle />} />
       </Routes>
     </BrowserRouter>

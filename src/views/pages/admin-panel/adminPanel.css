@@ -1,0 +1,16 @@
+.admin-panel {
+    margin-top: 10rem;
+
+}
+a{
+    text-decoration: none !important;
+    color: var(--blank-color);
+    
+}
+.eliminar:hover, .editar:hover{
+    color: var(--main-color);
+}
+.boton-agregar{
+    background-color: var(--main-color) !important;
+    color: var(--blank-color);
+}

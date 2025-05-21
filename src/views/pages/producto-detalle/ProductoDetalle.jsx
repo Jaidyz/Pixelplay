@@ -9,7 +9,6 @@ import ShoppingCart from "../../../assets/icons/ShoppingCart";
 import HeartIcon from "../../../assets/icons/HeartIcon";
 import Swal from "sweetalert2";
 
-
 function ProductoDetalle() {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
@@ -47,7 +46,17 @@ function ProductoDetalle() {
   const handleAddToFavorites = async (productId) => {
     try {
       if (!user?.id) {
-        console.error("Usuario no autenticado en favoritos");
+        Swal.fire({
+          position: "bottom-end",
+          icon: "error",
+          title: "Inicia sesión para agregar a favoritos.",
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            popup: "mini-toast",
+          },
+          toast: true, // Para hacerlo tipo toast
+        });
         return;
       }
       const { data, error } = await supabase
@@ -83,7 +92,17 @@ function ProductoDetalle() {
   const handleAddToCart = async (productId, price) => {
     try {
       if (!user?.id) {
-        console.error("Usuario no autenticado en carrito");
+        Swal.fire({
+          position: "bottom-end",
+          icon: "error",
+          title: "Inicia sesión para agregar al carrito.",
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            popup: "mini-toast",
+          },
+          toast: true, // Para hacerlo tipo toast
+        });
         return;
       }
 

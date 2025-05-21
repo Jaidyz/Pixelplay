@@ -221,7 +221,8 @@ function Navbar() {
           </div>
           <section className="opciones">
             <p>¡Bienvenido a PixelPlay!</p>
-            <div>Configuraciones</div>
+            <div><Link to={"adminpanel"}>Admin panel</Link></div>
+            <div onClick={handleLogout}>Configuración</div>
             <div onClick={handleLogout}>Cerrar Sesión</div>
           </section>
         </div>

@@ -14,7 +14,7 @@ export default function Footer() {
           Explora nuestras categorías y descubre lo último en videojuegos y
           accesorios.
         </p>
-        <Link>Ir a la Tienda</Link>
+        <Link to={"/videojuegos"}>Ir a la Tienda</Link>
       </div>
 
       <p>© 2025 Tienda de Videojuegos. Todos los derechos reservados.</p>
