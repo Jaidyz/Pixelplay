@@ -1,5 +1,5 @@
 import React from 'react';
-import './Card.css';
+import './card.css';
 import ShoppingCart from '../../../assets/icons/ShoppingCart';
 import HeartIcon from '../../../assets/icons/HeartIcon';
 import { Link } from 'react-router-dom';
