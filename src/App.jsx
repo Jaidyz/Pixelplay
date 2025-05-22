@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import "/app.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Videogames from "./views/pages/videogames/Videogames";
@@ -8,21 +8,23 @@ import Login from "./views/pages/login-register/Login";
 import Home from "./views/pages/Home";
 import ProductoDetalle from "./views/pages/producto-detalle/ProductoDetalle";
 import AdminPanel from "./views/pages/admin-panel/AdminPanel";
-
+import Success from "./views/pages/success/Success";  
+import Cancel from "./views/pages/cancel/Cancel";   
 
 export default function App() {
   return (
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/videojuegos" element={<Videogames />} />
-          <Route path="/accesorios" element={<Accesorios />} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/adminpanel" element={<AdminPanel/>} />
-          <Route path="/videojuegos/:id/:name" element={<ProductoDetalle />} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/videojuegos" element={<Videogames />} />
+        <Route path="/accesorios" element={<Accesorios />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/adminpanel" element={<AdminPanel />} />
+        <Route path="/videojuegos/:id/:name" element={<ProductoDetalle />} />
+        <Route path="/success" element={<Success />} />
+        <Route path="/cancel" element={<Cancel />} />
       </Routes>
     </BrowserRouter>
   );
 }
-
