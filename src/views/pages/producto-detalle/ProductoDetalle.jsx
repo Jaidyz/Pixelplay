@@ -8,6 +8,9 @@ import "./producto-detalle.css";
 import ShoppingCart from "../../../assets/icons/ShoppingCart";
 import HeartIcon from "../../../assets/icons/HeartIcon";
 import Swal from "sweetalert2";
+import Resenas from "../../components/reseñas/Resenas.jsx";
+import "animate.css";
+import { div } from "three/tsl";
 
 function ProductoDetalle() {
   const { id } = useParams();
@@ -232,7 +235,15 @@ function ProductoDetalle() {
   };
 
   if (error) return <p>Error: {error}</p>;
-  if (!producto) return <p>Cargando producto...</p>;
+  if (!producto)
+    return (
+      <div className="cargando-producto-detalle">
+        {" "}
+        <p className=" animate__animated animate__flash">
+          Cargando producto...
+        </p>
+      </div>
+    );
 
   return (
     <>
@@ -243,7 +254,12 @@ function ProductoDetalle() {
             <>
               <h2>Trailer</h2>
               <section className="trailer">
-                <ReactPlayer url={producto.trailer_url} controls />
+                <ReactPlayer
+                  url={producto.trailer_url}
+                  controls
+                  width={"auto"}
+                  height={"280px"}
+                />
               </section>
             </>
           ) : (
@@ -272,6 +288,9 @@ function ProductoDetalle() {
             </button>
           </div>
         </section>
+      </section>
+      <section className="reseñas">
+        <Resenas />
       </section>
       <Footer />
     </>

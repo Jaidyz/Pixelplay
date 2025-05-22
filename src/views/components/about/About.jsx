@@ -4,7 +4,10 @@ import { WebGLRenderer } from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import "animate.css";
 import "./about.css";
-
+import Img1 from "/img1.png";
+import Img2 from "/img2.png";
+import LetrasPixelPlay from "/pixelplayLetras.webp";
+import VideoFondo from "/video_fondo.mp4";
 export default function About() {
   const threeContainer = useRef(null);
   const [webGLAvailable, setWebGLAvailable] = useState(true);
@@ -214,7 +217,7 @@ export default function About() {
     <section className="about-container">
       {/* Video de fondo */}
       <video autoPlay loop muted className="background-video">
-        <source src="src/assets/video_fondo.mp4" type="video/mp4" />
+        <source src={VideoFondo} type="video/mp4" />
         Tu navegador no soporta el video HTML5.
       </video>
 
@@ -238,15 +241,15 @@ export default function About() {
       {/* Contenido principal - Información de la tienda */}
       <div className="content">
         <div className="img1 animate__animated animate__fadeInRight">
-          <img src="src/assets/img1.png" alt="Juegos destacados" />
+          <img src={Img1} alt="Juegos destacados" />
         </div>
 
         <div className="img2 animate__animated animate__fadeInLeft">
-          <img src="src/assets/img2.png" alt="Consolas y accesorios" />
+          <img src={Img2} alt="Consolas y accesorios" />
         </div>
 
         <div className="pixel-play-letras animate__animated animate__zoomIn">
-          <img src="src/assets/pixelPlayLetras.webp" alt="PixelPlay" />
+          <img src={LetrasPixelPlay} alt="PixelPlay" />
         </div>
 
         <div className="pixel-play-logo animate__animated animate__zoomIn">

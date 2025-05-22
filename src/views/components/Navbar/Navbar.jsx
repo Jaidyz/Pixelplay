@@ -1,12 +1,20 @@
 
+
 import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, use } from "react";
+
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import ShoppingCart from "../../../assets/icons/ShoppingCart";
 import HeartIcon from "../../../assets/icons/HeartIcon";
 import UserIcon from "../../../assets/icons/UserIcon";
 import { useAuth } from "../../../context/AuthContext";
 import logoDesktop from "/PixelPlay.png";
+
 import logoMobile from "/LogoPixelPlay.png";
+
+import logoMobile from "/LogoPixelPlay.webp";
+
 import { supabase } from "../../../../supabase/supabase.config";
 import Swal from "sweetalert2";
 import "./navbar.css";
@@ -24,6 +32,7 @@ function Navbar() {
 
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   const isLoggedIn = !!session;
 
@@ -183,6 +192,7 @@ function Navbar() {
     }
   };
 
+
   // Calcular total acumulado del carrito
   const totalPrecioCarrito = cartItems.reduce(
     (acc, item) => acc + item.cantidad * item.precio_unitario,
@@ -223,6 +233,30 @@ const handleCheckout = async () => {
 
 
 
+
+  useEffect(() => {
+    if (session?.user?.id) {
+      fetchUserData();
+    }
+  }, [session]);
+  const fetchUserData = async () => {
+  if (!session?.user?.id) return;
+  
+  const { data, error } = await supabase
+    .from('usuarios')
+    .select('*')
+    .eq('auth_user_id', session.user.id)
+    .single(); // .single() porque esperamos un solo resultado
+    
+  if (error) {
+    console.error('Error al obtener datos del usuario:', error);
+  } else {
+    console.log('Datos del usuario:', data);
+    // Aquí puedes guardar los datos en el estado
+    setUserData(data);
+  }
+};
+
   return (
     <>
       <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
@@ -235,7 +269,7 @@ const handleCheckout = async () => {
           </Link>
         </section>
         <section className="menu">
-          <NavLink to="/">Inicio</NavLink>
+          <NavLink to="/" className={"inicio-menu"}>Inicio</NavLink>
           <NavLink to="/videojuegos">Videojuegos</NavLink>
           <NavLink to="/accesorios">Accesorios</NavLink>
         </section>
@@ -293,6 +327,9 @@ const handleCheckout = async () => {
             <div>
               <Link to="adminpanel">Admin panel</Link>
             </div>
+            {userData && userData.tipo === "admin" && (
+              <div><Link to={"adminpanel"}>Admin panel</Link></div>
+              )}
             <div onClick={handleLogout}>Configuración</div>
             <div onClick={handleLogout}>Cerrar Sesión</div>
           </section>

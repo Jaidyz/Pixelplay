@@ -5,6 +5,7 @@ import { useAuth } from "../../../context/AuthContext";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
+import Logo from "/LogoPixelPlay.webp";
 function Login() {
   const { session, signIn } = useAuth();
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ function Login() {
     <>
       <div className="logo">
         <Link to="/">
-          <img src="./src/assets/LogoPixelPlay.webp" alt="" />
+          <img src={Logo} alt="" />
         </Link>
       </div>
       <div className="container-login-register">
