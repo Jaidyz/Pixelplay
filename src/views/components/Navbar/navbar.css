@@ -268,3 +268,11 @@
     height: auto;
   }
 }
+@media(max-width:500px){
+.usuario-info-logged{
+    flex-direction: column;
+  }
+  .inicio-menu{
+    display: none;
+  }
+}

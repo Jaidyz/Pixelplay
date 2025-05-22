@@ -1,0 +1,55 @@
+.reseñas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 20px 0;
+    padding: .5rem;
+    gap: 20px;
+    max-width: 100%;
+    & .cargando-reseñas{
+        color: var(--main-color);
+        font-size: 1.5rem;
+    }
+    & h2{
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--main-color);
+    }
+    & .no-reseñas{
+        color: var(--main-color);
+        font-size: 1.5rem;
+    }
+}
+.reseña{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--background-color2);
+    border-radius: 1rem;
+    padding: 1rem;
+}
+
+.usuario-reseña{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    & p{
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--main-color);
+    }
+}
+.fecha{
+    color: var(--secondary-color);
+}
+.fecha-calificacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}

@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
+import Logo from "/LogoPixelPlay.webp";
 import { supabase } from "../../../../supabase/supabase.config.jsx";
 
 
@@ -108,7 +109,7 @@ export default function Register() {
     <>
       <div className="logo">
         <Link to="/">
-          <img src="./src/assets/LogoPixelPlay.webp" alt="" />
+          <img src={Logo} alt="" />
         </Link>
       </div>
       <div className="container-login-register">
