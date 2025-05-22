@@ -204,7 +204,7 @@ function Navbar() {
           </Link>
         </section>
         <section className="menu">
-          <NavLink to="/">Inicio</NavLink>
+          <NavLink to="/" className={"inicio-menu"}>Inicio</NavLink>
           <NavLink to="/videojuegos">Videojuegos</NavLink>
           <NavLink to="/accesorios">Accesorios</NavLink>
         </section>

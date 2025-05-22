@@ -107,6 +107,20 @@
   background-color: var(--main-color) !important;
   color: var(--blank-color) !important;
 }
+.cargando-producto-detalle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background-color2);
+  & p{
+    color: var(--main-color);
+    font-size: 2rem;
+    font-weight: 600;
+  }
+}
 
 /* Media Query para dispositivos móviles */
 @media (max-width: 768px) {
