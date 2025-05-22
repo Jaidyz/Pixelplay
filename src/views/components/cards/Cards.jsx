@@ -1,4 +1,3 @@
-// Cards.jsx
 import React, { useEffect, useState } from "react";
 import Card from "../card/Card";
 import "./cards.css";
@@ -50,39 +49,13 @@ function Cards({ tipo, categoria }) {
           title: "Inicia sesión para agregar a favoritos.",
           showConfirmButton: false,
           timer: 1500,
-          toast: true,
-          customClass: { popup: "mini-toast" },
+          customClass: {
+            popup: "mini-toast",
+          },
+          toast: true, // Para hacerlo tipo toast
         });
         return;
       }
-      
-      // Verificar si el producto ya está en la lista de deseos
-      const { data: existingFav, error: favError } = await supabase
-        .from("lista_deseos")
-        .select("*")
-        .eq("usuario_id", user.id)
-        .eq("producto_id", productId)
-        .maybeSingle();
-      
-      if (favError) {
-        console.error("Error al verificar favoritos:", favError);
-        return;
-      }
-
-      if (existingFav) {
-        Swal.fire({
-          position: "bottom-end",
-          icon: "info",
-          title: "El producto ya está en tu lista de deseos.",
-          showConfirmButton: false,
-          timer: 1500,
-          toast: true,
-          customClass: { popup: "mini-toast" },
-        });
-        return;
-      }
-
-      // Insertar en lista_deseos
       const { data, error } = await supabase
         .from("lista_deseos")
         .insert([
@@ -93,19 +66,21 @@ function Cards({ tipo, categoria }) {
           },
         ])
         .select();
-
-      if (error) {
-        throw error;
-      }
       Swal.fire({
         position: "bottom-end",
         icon: "success",
         title: "Producto agregado a lista de deseos.",
         showConfirmButton: false,
         timer: 1500,
-        toast: true,
-        customClass: { popup: "mini-toast" },
+        customClass: {
+          popup: "mini-toast",
+        },
+        toast: true, // Para hacerlo tipo toast
       });
+
+      if (error) {
+        throw error;
+      }
       console.log("Producto agregado a lista de deseos:", data);
     } catch (error) {
       console.error("Error al agregar a lista de deseos:", error);
@@ -121,13 +96,14 @@ function Cards({ tipo, categoria }) {
           title: "Inicia sesión para agregar al carrito.",
           showConfirmButton: false,
           timer: 1500,
-          toast: true,
-          customClass: { popup: "mini-toast" },
+          customClass: {
+            popup: "mini-toast",
+          },
+          toast: true, // Para hacerlo tipo toast
         });
         return;
       }
 
-      // Verificar si existe un pedido en carrito para el usuario
       let { data: pedidoExistente, error: pedidoError } = await supabase
         .from("pedidos")
         .select("*")
@@ -159,66 +135,33 @@ function Cards({ tipo, categoria }) {
       } else {
         pedido_id = pedidoExistente.id;
       }
+      Swal.fire({
+        position: "bottom-end",
+        icon: "success",
+        title: "Producto agregado al carrito.",
+        showConfirmButton: false,
+        timer: 1500,
+        customClass: {
+          popup: "mini-toast",
+        },
+        toast: true, // Para hacerlo tipo toast
+      });
 
-      // Verificar si el producto ya existe en el carrito
-      const { data: existingDetail, error: detailError } = await supabase
+      const { data, error } = await supabase
         .from("detalles_pedido")
-        .select("*")
-        .eq("pedido_id", pedido_id)
-        .eq("producto_id", productId)
-        .maybeSingle();
-
-      if (detailError) {
-        throw detailError;
+        .insert([
+          {
+            pedido_id: pedido_id,
+            producto_id: productId,
+            cantidad: 1,
+            precio_unitario: price,
+          },
+        ])
+        .select();
+      if (error) {
+        throw error;
       }
-
-      if (existingDetail) {
-        // Actualizar la cantidad incrementándola
-        const { data, error } = await supabase
-          .from("detalles_pedido")
-          .update({ cantidad: existingDetail.cantidad + 1 })
-          .eq("id", existingDetail.id)
-          .select();
-        if (error) {
-          throw error;
-        }
-        Swal.fire({
-          position: "bottom-end",
-          icon: "success",
-          title: "Cantidad actualizada en el carrito.",
-          showConfirmButton: false,
-          timer: 1500,
-          toast: true,
-          customClass: { popup: "mini-toast" },
-        });
-        console.log("Cantidad actualizada en el carrito:", data);
-      } else {
-        // Insertar nuevo producto en el carrito
-        const { data, error } = await supabase
-          .from("detalles_pedido")
-          .insert([
-            {
-              pedido_id: pedido_id,
-              producto_id: productId,
-              cantidad: 1,
-              precio_unitario: price,
-            },
-          ])
-          .select();
-        if (error) {
-          throw error;
-        }
-        Swal.fire({
-          position: "bottom-end",
-          icon: "success",
-          title: "Producto agregado al carrito.",
-          showConfirmButton: false,
-          timer: 1500,
-          toast: true,
-          customClass: { popup: "mini-toast" },
-        });
-        console.log("Producto agregado al carrito:", data);
-      }
+      console.log("Producto agregado al carrito:", data);
     } catch (error) {
       console.error("Error al agregar al carrito:", error);
     }
@@ -226,7 +169,9 @@ function Cards({ tipo, categoria }) {
 
   const filteredProducts = productos
     .filter((producto) => (tipo ? producto.tipo_producto === tipo : true))
-    .filter((producto) => (categoria ? producto.categoria === categoria : true));
+    .filter((producto) =>
+      categoria ? producto.categoria === categoria : true
+    );
 
   return (
     <section className="cards">
