@@ -304,9 +304,9 @@ function Navbar() {
           <section className="opciones">
             <p>¡Bienvenido a PixelPlay!</p>
             {userData && userData.tipo === "admin" && (
-              <div><Link to={"adminpanel"}>Admin panel</Link></div>
+              <div><Link to={"/adminpanel"}>Admin panel</Link></div>
             )}
-            <div onClick={handleLogout}>Configuración</div>
+            <div><Link to={"/configuracionUsuario"}>Configuración</Link></div>
             <div onClick={handleLogout}>Cerrar Sesión</div>
           </section>
         </div>
