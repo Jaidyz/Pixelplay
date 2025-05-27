@@ -6,6 +6,8 @@ import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./styles.css";
 import Logo from "/LogoPixelPlay.webp";
+import Swal from "sweetalert2";
+
 function Login() {
   const { session, signIn } = useAuth();
   const navigate = useNavigate();
@@ -38,6 +40,19 @@ function Login() {
             ? "Credenciales inválidas. Verifica tu correo y contraseña."
             : "Error al iniciar sesión. Inténtalo de nuevo más tarde."
         );
+        Swal.fire({
+          position: "bottom-end",
+          icon: "error",
+          title:
+            error.message === "Invalid login credentials"
+              ? "Credenciales inválidas. Verifica tu correo y contraseña."
+              : "Error al iniciar sesión. Inténtalo de nuevo más tarde.",
+          showConfirmButton: false,
+          timer: 2000,
+          toast: true,
+          customClass: { popup: "mini-toast" },
+          theme: "dark",
+        });
       } else {
         // Si el inicio de sesión es exitoso, redirigir al usuario
         console.log("Inicio de sesión exitoso");
@@ -48,6 +63,16 @@ function Login() {
       setLoginError(
         "Ocurrió un error inesperado. Inténtalo de nuevo más tarde."
       );
+      Swal.fire({
+        position: "bottom-end",
+        icon: "error",
+        title: "Ocurrió un error inesperado. Inténtalo de nuevo más tarde.",
+        showConfirmButton: false,
+        timer: 2000,
+        toast: true,
+        customClass: { popup: "mini-toast" },
+        theme: "dark",
+      });
     } finally {
       setIsLoading(false);
     }
